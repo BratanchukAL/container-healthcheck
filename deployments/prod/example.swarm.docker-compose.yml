@@ -1,14 +1,29 @@
 version: '3'
 
 services:
-    container_healtheck:
+    container_healtheck_manager:
+        image: ${CI_REGISTRY_API_WITH_PREFIX}_container_healtheck
+        deploy:
+            replicas: 1
+            # dnsrr - returns a list of IP addresses (DNS round-robin)
+            endpoint_mode: vip
+            placement:
+                constraints:
+                    - node.platform.os == linux
+                    - node.role==manager  # worker or manager
+        environment:
+            - MODE=manager  # worker or manager
+    container_healtheck_node:
         image: ${CI_REGISTRY_API_WITH_PREFIX}_container_healtheck
         deploy:
             #  setting deploy: mode: global ensures exactly one container task runs on every active node in the cluster.
             mode: global
-#            replicas: each by 1
+            #            replicas: each by 1
             # dnsrr - returns a list of IP addresses (DNS round-robin)
             endpoint_mode: dnsrr
             placement:
                 constraints:
                     - node.platform.os == linux
+                    - node.role==worker
+        environment:
+            - MODE=worker  # worker or manager
