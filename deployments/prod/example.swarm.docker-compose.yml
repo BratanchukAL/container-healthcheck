@@ -1,12 +1,13 @@
 version: '3'
 
 services:
-    backend:
+    container_healtheck:
         image: ${CI_REGISTRY_API_WITH_PREFIX}_container_healtheck
         deploy:
             #  setting deploy: mode: global ensures exactly one container task runs on every active node in the cluster.
             mode: global
 #            replicas: each by 1
+            # dnsrr - returns a list of IP addresses (DNS round-robin)
             endpoint_mode: dnsrr
             placement:
                 constraints:
