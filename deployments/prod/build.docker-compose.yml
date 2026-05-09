@@ -1,0 +1,10 @@
+version: '3'
+# CI build images and push to registry.
+services:
+    backend:
+        image: ${CI_REGISTRY_API_WITH_PREFIX}_container_healtheck
+        build:
+            context: ../../
+            dockerfile: ./deployments/prod/container_healtheck/Dockerfile
+        expose:
+            - 9100
