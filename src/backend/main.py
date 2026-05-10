@@ -2,6 +2,11 @@ import logging
 
 import uvicorn
 
+try:
+    import to_path
+except ImportError:
+    print('Error import to_path')
+
 from bootstrap import app
 
 logger = logging.getLogger(__name__)
