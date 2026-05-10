@@ -13,6 +13,7 @@ services:
                     - node.role==manager  # worker or manager
         environment:
             - MODE=manager  # worker or manager
+
     container_healtheck_node:
         image: ${CI_REGISTRY_API_WITH_PREFIX}_container_healtheck
         deploy:

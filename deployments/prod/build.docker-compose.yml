@@ -6,5 +6,7 @@ services:
         build:
             context: ../../
             dockerfile: ./deployments/prod/container_healtheck/Dockerfile
+            args:
+                - SERVICE_INTERNAL_PORT=${SERVICE_INTERNAL_PORT}
         expose:
-            - 9100
+            - ${SERVICE_INTERNAL_PORT}
