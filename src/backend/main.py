@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     if configs.app.DEBUG:
         import uvicorn
-        logger.warning(f"Start debug server!")
+        logger.warning(f"WARNING: Start debug server!")
         # app: The FastAPI instance defined above
         # host: The address to listen on (0.0.0.0 listens on all interfaces)
         # port: The port to run the server on
