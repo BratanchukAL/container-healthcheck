@@ -21,6 +21,8 @@ services:
             - MODE=manager  # worker or manager
             - SERVICE_INTERNAL_PORT
             - SERVICE_UVICORN_WORKERS
+        volumes:
+            -  docker_socket_file:/var/run/docker.sock:ro
 
     container_healtheck_node:
         image: ${CI_REGISTRY_API_WITH_PREFIX}_container_healtheck
@@ -44,3 +46,13 @@ services:
             - MODE=worker  # worker or manager
             - SERVICE_INTERNAL_PORT
             - SERVICE_UVICORN_WORKERS
+        volumes:
+            - docker_socket_file:/var/run/docker.sock:ro
+
+volumes:
+    docker_socket_file:
+        driver: local
+            driver_opts:
+                type: 'none'
+                o: 'bind'
+                device: '/var/run/docker.sock'
