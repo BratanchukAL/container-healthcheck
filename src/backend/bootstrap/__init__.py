@@ -1,4 +1,5 @@
 from .fastapi_init import app
+from .logger_init import *
 
 try:
     import to_path

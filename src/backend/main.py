@@ -7,11 +7,12 @@ from bootstrap import app
 
 from docker import DockerClient
 
-from configs.app import DEBUG
+import configs.app
+import configs.docker_socket
 
 
 # Connect to the proxy service defined in docker-compose
-client = DockerClient(base_url="tcp://localhost:2375")
+client = DockerClient(base_url=configs.docker_socket.DOCKER_SOCKET_PATH, timeout=5)
 
 
 @app.get("/containers")
@@ -25,7 +26,7 @@ def healthcheck() -> None:
 
 
 if __name__ == "__main__":
-    if DEBUG:
+    if configs.app.DEBUG:
         # app: The FastAPI instance defined above
         # host: The address to listen on (0.0.0.0 listens on all interfaces)
         # port: The port to run the server on
