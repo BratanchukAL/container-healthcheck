@@ -11,8 +11,16 @@ services:
                 constraints:
                     - node.platform.os == linux
                     - node.role==manager  # worker or manager
+        healthcheck:
+            test: [ "CMD", "curl", "--fail", "http://localhost:${SERVICE_INTERNAL_PORT}/healthcheck/" ]
+            start_period: 10s
+            interval: 10s
+            timeout: 5s
+            retries: 10
         environment:
             - MODE=manager  # worker or manager
+            - SERVICE_INTERNAL_PORT
+            - SERVICE_UVICORN_WORKERS
 
     container_healtheck_node:
         image: ${CI_REGISTRY_API_WITH_PREFIX}_container_healtheck
@@ -26,5 +34,13 @@ services:
                 constraints:
                     - node.platform.os == linux
                     - node.role==worker
+        healthcheck:
+            test: [ "CMD", "curl", "--fail", "http://localhost:${SERVICE_INTERNAL_PORT}/healthcheck/" ]
+            start_period: 10s
+            interval: 10s
+            timeout: 5s
+            retries: 10
         environment:
             - MODE=worker  # worker or manager
+            - SERVICE_INTERNAL_PORT
+            - SERVICE_UVICORN_WORKERS

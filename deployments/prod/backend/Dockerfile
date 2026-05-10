@@ -26,3 +26,6 @@ RUN python3 -m pip install --no-cache-dir -r requirements.deploy.txt
 # copy SRC
 # ===================================================
 COPY ./src/ ./
+
+
+ENTRYPOINT["fastapi", "run", "backend/main.py", "--port", "${SERVICE_INTERNAL_PORT}"]
