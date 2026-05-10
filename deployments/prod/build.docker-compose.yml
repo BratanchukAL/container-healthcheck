@@ -5,7 +5,7 @@ services:
         image: ${CI_REGISTRY_API_WITH_PREFIX}_container_healtheck
         build:
             context: ../../
-            dockerfile: ./deployments/prod/container_healtheck/Dockerfile
+            dockerfile: backend/Dockerfile
             args:
                 - SERVICE_INTERNAL_PORT=${SERVICE_INTERNAL_PORT}
         expose:
