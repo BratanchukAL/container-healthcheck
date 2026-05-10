@@ -19,3 +19,5 @@ def list_containers() -> List[str]:
     logger.info('uses list_containers')
     return [c.name for c in client.containers.list()]
 
+
+__all__ = []
