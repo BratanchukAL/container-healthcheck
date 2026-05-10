@@ -1,7 +1,5 @@
 import logging
 
-import uvicorn
-
 try:
     import to_path
 except ImportError:
@@ -14,6 +12,7 @@ if __name__ == "__main__":
     import configs.app
 
     if configs.app.DEBUG:
+        import uvicorn
         logger.warning(f"Start debug server!")
         # app: The FastAPI instance defined above
         # host: The address to listen on (0.0.0.0 listens on all interfaces)
