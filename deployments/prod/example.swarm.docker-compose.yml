@@ -52,7 +52,7 @@ services:
 volumes:
     docker_socket_file:
         driver: local
-            driver_opts:
-                type: 'none'
-                o: 'bind'
-                device: '/var/run/docker.sock'
+        driver_opts:
+            type: 'none'
+            o: 'bind'
+            device: '/var/run/docker.sock'
