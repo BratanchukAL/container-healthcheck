@@ -14,6 +14,9 @@ MODE = env.str(
         error="MODE must be one of: {choices}"
     )
 )
+
+OPEN_API_ENABLED = env.bool("OPEN_API_ENABLED", False)
+
 # BACKEND_SECRET_KEY = env.str("BACKEND_SECRET_KEY")
 # BACKEND_ALLOWED_HOSTS: List[str] = env.list("BACKEND_ALLOWED_HOSTS")
 # SERVER_BACKEND_URL: str = env.str("SERVER_BACKEND_URL")

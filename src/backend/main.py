@@ -5,12 +5,12 @@ import uvicorn
 from bootstrap import app
 from api import *
 
-import configs.app
-
 logger = logging.getLogger(__name__)
 
 
 if __name__ == "__main__":
+    import configs.app
+
     if configs.app.DEBUG:
         logger.warning(f"Start debug server! - {app=}")
         # app: The FastAPI instance defined above
