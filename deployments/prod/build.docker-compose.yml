@@ -6,7 +6,5 @@ services:
         build:
             context: ../../
             dockerfile: backend/Dockerfile
-            args:
-                - SERVICE_INTERNAL_PORT=${SERVICE_INTERNAL_PORT}
         expose:
             - ${SERVICE_INTERNAL_PORT}
