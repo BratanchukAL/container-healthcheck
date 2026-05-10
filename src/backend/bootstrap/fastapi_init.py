@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 import configs.app
+
 from .logger_init import *
 
 logger = logging.getLogger(__name__)

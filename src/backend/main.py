@@ -3,7 +3,7 @@ import logging
 import uvicorn
 
 from bootstrap import app
-from api import *
+from api import init_api
 
 logger = logging.getLogger(__name__)
 
@@ -17,3 +17,6 @@ if __name__ == "__main__":
         # host: The address to listen on (0.0.0.0 listens on all interfaces)
         # port: The port to run the server on
         uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+
+if __name__ == "main":
+    init_api()
