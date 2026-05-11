@@ -21,5 +21,10 @@ Example read status healthcheck in Docker:
 
 Example local dev:
 
-        docker service create --name stack_nginx-service --endpoint-mode dnsrr --replicas 3  nginx
+        docker network create --driver overlay stack_nginx-service-network
+        docker service create --name stack_nginx-service --network name=stack_nginx-service-network,alias=stack_nginx-service  --replicas 3  nginx
         docker service rm stack_nginx-service 
+
+        docker service create --name stack_nginx-service2 --network name=stack_nginx-service-network,alias=stack_nginx-service2  --replicas 1 nginx
+        
+        docker exec -it 6fb974f6316b8dd62b8964dee37febb663061f7c45485ec9aaf721ed4cb111b1  bash
