@@ -16,8 +16,14 @@ client = DockerClient(base_url=configs.docker_socket.DOCKER_SOCKET_PATH, timeout
 
 @app.get("/containers")
 def list_containers() -> List[str]:
-    logger.info('uses list_containers')
+    # logger.info('uses list_containers')
     return [c.name for c in client.containers.list()]
+
+
+@app.get("/container_healthcheck")
+def container_healthcheck() -> None:
+    pass
+    client.services.get()
 
 
 __all__ = []
