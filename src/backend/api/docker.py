@@ -1,6 +1,6 @@
 import logging
 import socket
-from typing import List, Dict, TypedDict
+from typing import List, Dict, TypedDict, Literal
 
 from docker import DockerClient
 
@@ -34,6 +34,9 @@ class Task(TypedDict):
     Status: TaskStatus
 
 
+HealthTyped = Literal['unknown', 'healthy', 'unhealthy', 'starting']
+
+
 @app.get("/containers")
 def list_containers() -> List[str]:
     # logger.info('uses list_containers')
@@ -50,19 +53,26 @@ def container_healthcheck() -> None:
     service = client.services.get(service_id=configs.docker_socket.DOCKER_SELF_SERVICE_ID)
     tasks: List[Task] = service.tasks(filters={"desired-state": 'Running'})
 
-    NodeID = None
-    Slot = -1
+    here_NodeID = None
+    here_Slot = -1
     for task in tasks:
         if here_hostname in task['Status']['ContainerStatus']['ContainerID']:
-            NodeID = task['NodeID']
-            Slot = task['Slot']
+            here_NodeID = task['NodeID']
+            here_Slot = task['Slot']
             break
 
     #
     target_service = client.services.get(service_id=p_service_id)
     target_tasks: List[Task] = target_service.tasks(filters={"desired-state": 'Running'})
 
-    client.services.get()
+    for task in target_tasks:
+        NodeID = task['NodeID']
+        container_id = task['Status']['ContainerStatus']['ContainerID']
+
+        if here_NodeID == NodeID:
+            health: HealthTyped = client.containers.get(container_id=container_id).health
+
+
 
     # client.services.get(service_id="stack_noname") NotFound 404
         # output  first Service?
