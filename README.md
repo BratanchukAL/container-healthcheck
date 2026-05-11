@@ -18,3 +18,8 @@ Example read status healthcheck in Docker:
         --OR other node
         Output:
             healthy
+
+Example local dev:
+
+        docker service create --name stack_nginx-service --endpoint-mode dnsrr --replicas 3  nginx
+        docker service rm stack_nginx-service 
