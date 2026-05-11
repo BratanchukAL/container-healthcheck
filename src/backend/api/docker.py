@@ -43,9 +43,9 @@ def list_containers() -> List[str]:
     return [c.name for c in client.containers.list()]
 
 
-@app.get("/container_healthcheck")
-def container_healthcheck() -> None:
-    p_service_id = 'stack_nginx-service2'
+@app.get("/healthcheck_one_of_service/{service_id}")
+def container_healthcheck(service_id: str) -> None:
+    p_service_id = 'stack_nginx-service2'  # service_id
 
     # cur_host_ip = socket.gethostbyname(socket.gethostname())
     here_hostname = socket.gethostname()
