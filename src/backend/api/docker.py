@@ -56,7 +56,7 @@ def container_healthcheck(service_id: str) -> None:
     here_NodeID = None
     here_Slot = -1
     for task in tasks:
-        if here_hostname in task['Status']['ContainerStatus']['ContainerID']:
+        if task['Status']['ContainerStatus']['ContainerID'].startswith(here_hostname):
             here_NodeID = task['NodeID']
             here_Slot = task['Slot']
             break
